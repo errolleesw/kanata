@@ -15,32 +15,41 @@
 )
 
 (defvar
-  tap-timeout      400
-  hold-timeout     150
-  tt               $tap-timeout
-  ht               $hold-timeout
+  tap-timeout                 400
+  holt-timeout-short          100
+  hold-timeout-medium         200
+  hold-timeout-long           300
+  tt                          $tap-timeout
+  hts                         $hold-timeout-short
+  htm                         $hold-timeout-medium
+  htl                         $hold-timeout-long
 )
 
 (defalias
   ;; Timeless home row mods - Left side
   ;; These activate hold when right-hand keys are pressed
 
-  q      (tap-hold-except-keys $tt $ht q lctl (q w e r t a s d f g z x c v b tab caps lsft 1 2 3 4 5 6))
-  w      (tap-hold-except-keys $tt $ht w lalt (q w e r t a s d f g z x c v b tab caps lsft 1 2 3 4 5 6))
-  e      (tap-hold-except-keys $tt $ht e lmet (q w e r t a s d f g z x c v b tab caps lsft 1 2 3 4 5 6))
-  r      (tap-hold-except-keys $tt $ht r lsft (q w e r t a s d f g z x c v b tab caps lsft 1 2 3 4 5 6))
+  q      (tap-hold-except-keys $tt $htm q lctl (q w e r t a s d f g z x c v b tab caps lsft 1 2 3 4 5 6))
+  w      (tap-hold-except-keys $tt $htm w lalt (q w e r t a s d f g z x c v b tab caps lsft 1 2 3 4 5 6))
+  ;; e      (tap-hold-except-keys $tt $htm e lmet (q w e r t a s d f g z x c v b tab caps lsft 1 2 3 4 5 6))
+  r      (tap-hold-except-keys $tt $htm r lsft (q w e r t a s d f g z x c v b tab caps lsft 1 2 3 4 5 6))
+
+  ;; q       (tap-hold $tt $htm q (layer-while-held lctl))
+  ;; w       (tap-hold $tt $htm w (layer-while-held lalt))
+  e       (tap-hold $tt $htm e (layer-while-held lmet))
+
 
   ;; Timeless home row mods - Right side  
   ;; These activate hold when left-hand keys are pressed
-  u      (tap-hold-except-keys $tt $ht u rsft (y u i o p h j k l ; n m , . / [ ] \ ' ret rsft 7 8 9 0 - = bspc))
-  i      (tap-hold-except-keys $tt $ht i rmet (y u i o p h j k l ; n m , . / [ ] \ ' ret rsft 7 8 9 0 - = bspc))
-  o      (tap-hold-except-keys $tt $ht o ralt (y u i o p h j k l ; n m , . / [ ] \ ' ret rsft 7 8 9 0 - = bspc))
-  p      (tap-hold-except-keys $tt $ht p rctl (y u i o p h j k l ; n m , . / [ ] \ ' ret rsft 7 8 9 0 - = bspc))
+  u      (tap-hold-except-keys $tt $htm u rsft (y u i o p h j k l ; n m , . / [ ] \ ' ret rsft 7 8 9 0 - = bspc))
+  i      (tap-hold-except-keys $tt $htm i rmet (y u i o p h j k l ; n m , . / [ ] \ ' ret rsft 7 8 9 0 - = bspc))
+  o      (tap-hold-except-keys $tt $htm o ralt (y u i o p h j k l ; n m , . / [ ] \ ' ret rsft 7 8 9 0 - = bspc))
+  p      (tap-hold-except-keys $tt $htm p rctl (y u i o p h j k l ; n m , . / [ ] \ ' ret rsft 7 8 9 0 - = bspc))
 
   ;; Special keys
-  hyp    (tap-hold $tt $ht esc (multi lctl lsft)) ;; Hyper key
-  tab    (tap-hold $tt $ht tab (layer-while-held sym)) ;; Tab activates fn layer
-  rcm    (tap-hold $tt $ht ret (layer-while-held navigation)) ;; Right cmd activates navigation layer
+  hyp    (tap-hold $tt $htm esc (multi lctl lsft)) ;; Hyper key
+  tab    (tap-hold $tt $htm tab (layer-while-held sym)) ;; Tab activates fn layer
+  rcm    (tap-hold $tt $htm ret (layer-while-held navigation)) ;; Right cmd activates navigation layer
   brc    (tap-hold 250 250 bspc (multi lalt bspc)) ;; [ as backspace/opt+backspace
 
 
@@ -82,4 +91,12 @@
   _        _       _       _       _       _       _       _       _       _       _       _       _
   _        _       _       _       _       _       _       _       _       _       _       _
   _        _       _       _                        _                        _       _       _       _       _       _
+)
+
+(deflayer lmet
+  _        _       _       _       _       _       _       _       _       _       _       _       _
+  _        _       _       _       _       _       _       _       _       _       _       _       _       _
+  M-tab    M-lctl  M-lalt  @xx     M-lsft  @xx     M-y     M-u     M-i     M-o     M-p     M-bspc  _       _
+  _        @xx     @xx     @xx     @xx     @xx     M-h     M-j     M-k     M-l     M-;     M-'     _
+  _        @xx     @xx     @xx     @xx     @xx     M-n     M-m     M-,     M-.     M-/     M-rsft         _       _        _       _                               _                       _       _       _       _       _      _
 )
