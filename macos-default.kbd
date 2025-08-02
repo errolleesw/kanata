@@ -163,12 +163,3 @@
   _        _       _       _       _       _       _       _       _       _       _       _
   _        _       _       _                        _                        _       _       _       _       _       _
 )
-
-(deflayer lmet
-  _        _       _       _       _       _       _       _       _       _       _       _       _
-  _        _       _       _       _       _       _       _       _       _       _       _       _       _
-  M-tab    M-lctl  M-lalt  @xx     M-lsft  @xx     M-y     M-u     M-i     M-o     M-p     M-bspc  _       _
-  _        @xx     @xx     @xx     @xx     @xx     M-h     M-j     M-k     M-l     M-;     M-'     _
-  _        @xx     @xx     @xx     @xx     @xx     M-n     M-m     M-,     M-.     M-/     M-rsft
-  _        _       _       _                        _                        _       _       _       _       _       _
-)
