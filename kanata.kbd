@@ -1,0 +1,85 @@
+(defcfg
+  ;; For MacOS - no explicit input/output needed, Kanata will auto-detect
+  process-unmapped-keys yes
+  log-layer-changes yes
+  danger-enable-cmd no
+)
+
+(defsrc
+  esc      f1      f2      f3      f4      f5      f6      f7      f8      f9      f10     f11     f12
+  grv      1       2       3       4       5       6       7       8       9       0       -       =       bspc
+  tab      q       w       e       r       t       y       u       i       o       p       [       ]       \
+  caps     a       s       d       f       g       h       j       k       l       ;       '       ret
+  lsft     z       x       c       v       b       n       m       ,       .       /       rsft
+  fn       lctl    lalt    lmet                    spc                    rmet     ralt     left    down    up      rght
+)
+
+(defvar
+  tap-timeout      400
+  hold-timeout     150
+  tt               $tap-timeout
+  ht               $hold-timeout
+)
+
+(defalias
+  ;; Timeless home row mods - Left side
+  ;; These activate hold when right-hand keys are pressed
+
+  q      (tap-hold-except-keys $tt $ht q lctl (q w e r t a s d f g z x c v b tab caps lsft 1 2 3 4 5 6))
+  w      (tap-hold-except-keys $tt $ht w lalt (q w e r t a s d f g z x c v b tab caps lsft 1 2 3 4 5 6))
+  e      (tap-hold-except-keys $tt $ht e lmet (q w e r t a s d f g z x c v b tab caps lsft 1 2 3 4 5 6))
+  r      (tap-hold-except-keys $tt $ht r lsft (q w e r t a s d f g z x c v b tab caps lsft 1 2 3 4 5 6))
+
+  ;; Timeless home row mods - Right side  
+  ;; These activate hold when left-hand keys are pressed
+  u      (tap-hold-except-keys $tt $ht u rsft (y u i o p h j k l ; n m , . / [ ] \ ' ret rsft 7 8 9 0 - = bspc))
+  i      (tap-hold-except-keys $tt $ht i rmet (y u i o p h j k l ; n m , . / [ ] \ ' ret rsft 7 8 9 0 - = bspc))
+  o      (tap-hold-except-keys $tt $ht o ralt (y u i o p h j k l ; n m , . / [ ] \ ' ret rsft 7 8 9 0 - = bspc))
+  p      (tap-hold-except-keys $tt $ht p rctl (y u i o p h j k l ; n m , . / [ ] \ ' ret rsft 7 8 9 0 - = bspc))
+
+  ;; Special keys
+  hyp    (tap-hold $tt $ht esc (multi lctl lsft)) ;; Hyper key
+  tab    (tap-hold $tt $ht tab (layer-while-held sym)) ;; Tab activates fn layer
+  rcm    (tap-hold $tt $ht ret (layer-while-held navigation)) ;; Right cmd activates navigation layer
+  brc    (tap-hold 250 250 bspc (multi lalt bspc)) ;; [ as backspace/opt+backspace
+
+
+  ;; Disabled keys
+  xx     XX
+)
+
+(deflayer default
+  esc      f1      f2      f3      f4      f5      f6      f7      f8      f9      f10     f11     f12
+  =        1       2       3       4       5       6       7       8       9       0       -       @xx     @xx
+  @tab     @q      @w      @e      @r      t       y       @u      @i      @o      @p      @brc    @xx     @xx
+  @hyp     a       s       d       f       g       h       j       k       l       ;       '       @xx
+  lsft     z       x       c       v       b       n       m       ,       .       /       rsft
+  fn       @xx     @xx     lmet                    spc                    @rcm     @xx     left    down    up      rght
+)
+
+(deflayer navigation
+  _        _       _       _       _       _       _       _       _       _       _       _       _
+  _        _       _       _       _       _       _       _       _       _       _       _       _       _
+  _        _       _       _       _       _       _       _       _       _       _       _       _       _
+  _        _       _       _       _       _       left    down    up      rght    _       _       _
+  _        _       _       _       _       _       _       _       _       _       _       _
+  _        _       _       _                        _                        _       _       _       _       _       _
+)
+
+(deflayer sym
+  _        _       _       _       _       _       _       _       _       _       _       _       _
+  _        _       _       _       _       _       _       _       _       _       _       lrld    _       _
+  _        _       _       _       _       _       _       _       _       _       _       del     _       _
+  _        _       grv     S-grv   \       S-\     _       _       _       _       _       _       _
+  _        _       [       ]       S-[     S-]     _       _       _       _       _       _
+  _        _       _       _                        _                        _       _       _       _       _       _
+)
+
+(deflayer rcmd
+  _        _       _       _       _       _       _       _       _       _       _       _       _
+  _        _       _       _       _       _       _       _       _       _       _       _       _       _
+  _        _       _       _       _       _       _       _       _       _       _       _       _       _
+  _        _       _       _       _       _       _       _       _       _       _       _       _
+  _        _       _       _       _       _       _       _       _       _       _       _
+  _        _       _       _                        _                        _       _       _       _       _       _
+)
