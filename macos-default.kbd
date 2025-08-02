@@ -29,22 +29,22 @@
   ;; Timeless home row mods - Left side
   ;; These activate hold when right-hand keys are pressed
 
-  q      (tap-hold-except-keys $tt $htm q lctl (q w e r t a s d f g z x c v b tab caps lsft 1 2 3 4 5 6))
-  w      (tap-hold-except-keys $tt $htm w lalt (q w e r t a s d f g z x c v b tab caps lsft 1 2 3 4 5 6))
-  ;; e      (tap-hold-except-keys $tt $htm e lmet (q w e r t a s d f g z x c v b tab caps lsft 1 2 3 4 5 6))
-  r      (tap-hold-except-keys $tt $htm r lsft (q w e r t a s d f g z x c v b tab caps lsft 1 2 3 4 5 6))
+  q      (tap-hold-except-keys $tt $htm q lctl (q w e r t a s d f g z x c v b))
+  w      (tap-hold-except-keys $tt $htm w lalt (q w e r t a s d f g z x c v b))
+  e      (tap-hold-except-keys $tt $htm e lmet (q w e r t a s d f g z x c v b))
+  r      (tap-hold-except-keys $tt $htm r lsft (q w e r t a s d f g z x c v b))
 
   ;; q       (tap-hold $tt $htm q (layer-while-held lctl))
   ;; w       (tap-hold $tt $htm w (layer-while-held lalt))
-  e       (tap-hold $tt $htm e (layer-while-held lmet))
+  ;; e       (tap-hold $tt $htm e (layer-while-held lmet))
 
 
   ;; Timeless home row mods - Right side  
   ;; These activate hold when left-hand keys are pressed
-  u      (tap-hold-except-keys $tt $htm u rsft (y u i o p h j k l ; n m , . / [ ] \ ' ret rsft 7 8 9 0 - = bspc))
-  i      (tap-hold-except-keys $tt $htm i rmet (y u i o p h j k l ; n m , . / [ ] \ ' ret rsft 7 8 9 0 - = bspc))
-  o      (tap-hold-except-keys $tt $htm o ralt (y u i o p h j k l ; n m , . / [ ] \ ' ret rsft 7 8 9 0 - = bspc))
-  p      (tap-hold-except-keys $tt $htm p rctl (y u i o p h j k l ; n m , . / [ ] \ ' ret rsft 7 8 9 0 - = bspc))
+  u      (tap-hold-except-keys $tt $htm u rsft (y u i o p h j k l ; n m , .))
+  i      (tap-hold-except-keys $tt $htm i rmet (y u i o p h j k l ; n m , .))
+  o      (tap-hold-except-keys $tt $htm o ralt (y u i o p h j k l ; n m , .))
+  p      (tap-hold-except-keys $tt $htm p rctl (y u i o p h j k l ; n m , .))
 
   ;; Special keys
   hyp    (tap-hold $tt $htm esc (multi lctl lsft)) ;; Hyper key
