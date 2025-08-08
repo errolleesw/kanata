@@ -74,32 +74,28 @@
   
   ;; Special keys
   hyp    (tap-hold $tt $htm esc (multi lctl lsft)) ;; Hyper key
-  ;; tab    (tap-hold $tt $htm tab (layer-while-held sym)) ;; Tab activates sym layer
-
-  ;; layer switching exmaples that calls hammerspoon macros to bring up HUD.
-  ;; tab (tap-hold $tt $htm
-  ;;       tab
-  ;;       (multi
-  ;;         (macro f20)                 ;; tell Hammerspoon: sym on
-  ;;         (layer-while-held sym)
-  ;;         (on-release tap-vkey sym-off) ;; tell Hammerspoon: base on release
-  ;;       ))
-
-  ;; tab (tap-hold $tt $htm
-  ;;     tab
-  ;;     (multi
-  ;;       (macro f20)          ;; tell Hammerspoon: show HUD
-  ;;       (layer-switch sym))) ;; switch permanently to sym
 
   tab (tap-hold $tt $htm
         tab
         (multi
-          (cmd $hs-cli -c r#"kanataHUDShow('sym')"#)  ;; show on press
+          (cmd $hs-cli -c r#"kanataHUDShow('Sym')"#)  ;; show on press
           (layer-while-held sym)                      ;; layer only while held
           (on-release tap-vkey hud-hide)))            ;; hide on release
 
-  grv    (tap-hold $tt $htm grv (layer-while-held service)) ;; Grave activates service layer
-  rcm    (tap-hold $tt $htm ret (layer-while-held navigation)) ;; Right cmd activates navigation layer
+  grv (tap-hold $tt $htm
+      grv
+      (multi
+        (cmd $hs-cli -c r#"kanataHUDShow('Service')"#)  ;; show on press
+        (layer-while-held service)                      ;; layer only while held
+        (on-release tap-vkey hud-hide)))            ;; hide on release
+
+  rcm (tap-hold $tt $htm
+      ret
+      (multi
+        (cmd $hs-cli -c r#"kanataHUDShow('Navigation')"#)  ;; show on press
+        (layer-while-held navigation)                      ;; layer only while held
+        (on-release tap-vkey hud-hide)))            ;; hide on release
+
   fdel   del ;; Forward delete (del) key
   obrk   (tap-hold $tt $htl 9 (macro [ [)) ;; tap-hold for open bracket [[ key for Obsidian.
   pipe   (tap-hold $tt $htm - S-\) ;; tap-hold for pipe (|) key
@@ -176,6 +172,7 @@
   
   ;; Four-key combination (right hyper)
   (u i o p) @rhyper     ;; u+i+o+p = all right modifiers
+
 
   ;; Special Combinations
   (       p [) @fdel    ;; p+[ = forward delete
