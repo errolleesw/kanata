@@ -70,17 +70,19 @@
   chi     (tap-hold-except-keys $tt $htm (chord uiop[-group i) rmet (y u i o p h j k l ; n m , .))
   cho     (tap-hold-except-keys $tt $htm (chord uiop[-group o) ralt (y u i o p h j k l ; n m , .))
   chp     (tap-hold-except-keys $tt $htm (chord uiop[-group p) rctl (y u i o p h j k l ; n m , .))
-  ch[     (chord uiop[-group [) ;; p+[ = forward delete  
   
   ;; Special keys
   hyp    (tap-hold $tt $htm esc (multi lctl lsft)) ;; Hyper key
-
+  obrk   (tap-hold $tt $htl 9 (macro [ [)) ;; tap-hold for open bracket [[ key for Obsidian.
+  pipe   (tap-hold $tt $htm - S-\) ;; tap-hold for pipe (|) key
+  
+  ;; LAYER keys
   tab (tap-hold $tt $htm
-        tab
-        (multi
-          (cmd $hs-cli -c r#"kanataHUDShow('Sym')"#)  ;; show on press
-          (layer-while-held sym)                      ;; layer only while held
-          (on-release tap-vkey hud-hide)))            ;; hide on release
+      tab
+      (multi
+        (cmd $hs-cli -c r#"kanataHUDShow('Sym')"#)  ;; show on press
+        (layer-while-held sym)                      ;; layer only while held
+        (on-release tap-vkey hud-hide)))            ;; hide on release
 
   grv (tap-hold $tt $htm
       grv
@@ -96,14 +98,6 @@
         (layer-while-held navigation)                      ;; layer only while held
         (on-release tap-vkey hud-hide)))            ;; hide on release
 
-  fdel   del ;; Forward delete (del) key
-  obrk   (tap-hold $tt $htl 9 (macro [ [)) ;; tap-hold for open bracket [[ key for Obsidian.
-  pipe   (tap-hold $tt $htm - S-\) ;; tap-hold for pipe (|) key
-  
-  ;; exit (multi
-  ;;           (macro f19)          ;; tell Hammerspoon: hide HUD
-  ;;           (layer-switch default)) ;; change 'base' to your actual base layer name
-
   exit (multi
     k       (cmd $hs-cli -c r#"kanataHUDHide()"#)
              (layer-switch default))
@@ -115,10 +109,6 @@
   sel_word (macro A-left A-S-right)
   sel_line (macro M-left M-left M-left M-S-right M-S-right M-S-right) ;; repeated to make sure we go to the start of the line and right to the end of the line.
 
-  ;; Select current line (macOS): ⌘← then ⌘⇧→
-  ;; sel_line (macro
-  ;;             (press lmet) (press lsft) left  (release lsft) (release lmet)
-  ;;             (press lmet) (press lsft) right (release lsft) (release lmet))
 
 )
 
@@ -155,7 +145,6 @@
   (  i    ) i           ;; single i = type i  
   (    o  ) o           ;; single o = type o
   (      p) p           ;; single p = type p
-  (        [) bspc      ;; single [ = backspace (bspc) 
   ;; Two-key combinations
   (u i    ) @rsc        ;; u+i = right shift+cmd
   (u   o  ) @rsa        ;; u+o = right shift+alt
@@ -173,15 +162,12 @@
   ;; Four-key combination (right hyper)
   (u i o p) @rhyper     ;; u+i+o+p = all right modifiers
 
-
-  ;; Special Combinations
-  (       p [) @fdel    ;; p+[ = forward delete
 )
 
 (deflayer default
   @xx      f1      f2      f3      f4      f5      f6      f7      f8      f9      f10     f11     f12
-  @grv     1       2       3       4       5       6       7       8       @obrk   0       @pipe   @xx     @xx
-  @tab     @chq    @chw    @che    @chr    t       y       @chu    @chi    @cho    @chp    @ch[    @xx     @xx
+  @grv     1       2       3       4       5       6       7       8       @obrk   0       @pipe   @xx     XX
+  @tab     @chq    @chw    @che    @chr    t       y       @chu    @chi    @cho    @chp    bspc     @xx     @xx
   @hyp     a       s       d       f       g       h       j       k       l       ;       '       @xx
   lsft     z       x       c       v       b       n       m       ,       .       /       rsft
   fn       @xx     @xx     lmet                    spc                    @rcm     @xx     left    down    up      rght
