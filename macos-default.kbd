@@ -2,7 +2,7 @@
   ;; For MacOS - no explicit input/output needed, Kanata will auto-detect
   process-unmapped-keys yes
   log-layer-changes yes
-  danger-enable-cmd no
+  danger-enable-cmd yes
 )
 
 (defsrc
@@ -25,6 +25,10 @@
   htm                         $hold-timeout-medium
   htl                         $hold-timeout-long
   ct                          $chord-timeout
+)
+
+(defvirtualkeys
+  sym-off (macro f19)
 )
 
 (defalias
@@ -69,12 +73,33 @@
   
   ;; Special keys
   hyp    (tap-hold $tt $htm esc (multi lctl lsft)) ;; Hyper key
-  tab    (tap-hold $tt $htm tab (layer-while-held sym)) ;; Tab activates sym layer
+  ;; tab    (tap-hold $tt $htm tab (layer-while-held sym)) ;; Tab activates sym layer
+
+  ;; layer switching exmaples that calls hammerspoon macros to bring up HUD.
+  tab (tap-hold $tt $htm
+        tab
+        (multi
+          (macro f20)                 ;; tell Hammerspoon: sym on
+          (layer-while-held sym)
+          (on-release tap-vkey sym-off) ;; tell Hammerspoon: base on release
+        ))
+
+  ;; tab (tap-hold $tt $htm
+  ;;     tab
+  ;;     (multi
+  ;;       (macro f20)          ;; tell Hammerspoon: show HUD
+  ;;       (layer-switch sym))) ;; switch permanently to sym
+
   grv    (tap-hold $tt $htm grv (layer-while-held service)) ;; Grave activates service layer
   rcm    (tap-hold $tt $htm ret (layer-while-held navigation)) ;; Right cmd activates navigation layer
   fdel   del ;; Forward delete (del) key
   obrk   (tap-hold $tt $htl 9 (macro [ [)) ;; tap-hold for open bracket [[ key for Obsidian.
   pipe   (tap-hold $tt $htm - S-\) ;; tap-hold for pipe (|) key
+  
+  exit (multi
+            (macro f19)          ;; tell Hammerspoon: hide HUD
+            (layer-switch default)) ;; change 'base' to your actual base layer name
+  
   ;; Disabled keys
   xx     XX
 )
@@ -155,7 +180,7 @@
 (deflayer sym
   _        _       _       _       _       _       _       _       _       _       _       _       _
   _        _       _       _       _       _       _       _       _       [       ]       \       _       _
-  _        _       _       _       _       _       _       _       _       _       _       _       _       _
+  @exit    _       _       _       _       _       _       _       _       _       _       _       _       _
   _        _       _       _       _       _       _       _       _       _       _       _       _
   _        _       _       _       _       _       _       _       -       =       _       _
   _        _       _       _                        _                        _       _       _       _       _       _
