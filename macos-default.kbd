@@ -61,18 +61,20 @@
   chr     (tap-hold-except-keys $tt $htm (chord qwer-group r) lsft (q w e r t a s d f g z x c v b))
 
   ;; RIGHT HAND Chord aliases WITH tap-hold behavior
-  chu     (tap-hold-except-keys $tt $htm (chord uiop-group u) rsft (y u i o p h j k l ; n m , .))
-  chi     (tap-hold-except-keys $tt $htm (chord uiop-group i) rmet (y u i o p h j k l ; n m , .))
-  cho     (tap-hold-except-keys $tt $htm (chord uiop-group o) ralt (y u i o p h j k l ; n m , .))
-  chp     (tap-hold-except-keys $tt $htm (chord uiop-group p) rctl (y u i o p h j k l ; n m , .))
+  chu     (tap-hold-except-keys $tt $htm (chord uiop[-group u) rsft (y u i o p h j k l ; n m , .))
+  chi     (tap-hold-except-keys $tt $htm (chord uiop[-group i) rmet (y u i o p h j k l ; n m , .))
+  cho     (tap-hold-except-keys $tt $htm (chord uiop[-group o) ralt (y u i o p h j k l ; n m , .))
+  chp     (tap-hold-except-keys $tt $htm (chord uiop[-group p) rctl (y u i o p h j k l ; n m , .))
+  ch[     (chord uiop[-group [) ;; p+[ = forward delete  
   
   ;; Special keys
   hyp    (tap-hold $tt $htm esc (multi lctl lsft)) ;; Hyper key
   tab    (tap-hold $tt $htm tab (layer-while-held sym)) ;; Tab activates sym layer
   grv    (tap-hold $tt $htm grv (layer-while-held service)) ;; Grave activates service layer
   rcm    (tap-hold $tt $htm ret (layer-while-held navigation)) ;; Right cmd activates navigation layer
-  brc    (tap-hold 250 250 bspc (multi lalt bspc)) ;; [ as backspace/opt+backspace
-
+  fdel   del ;; Forward delete (del) key
+  obrk   (tap-hold $tt $htl 9 (macro [ [)) ;; tap-hold for open bracket [[ key for Obsidian.
+  pipe   (tap-hold $tt $htm - S-\) ;; tap-hold for pipe (|) key
   ;; Disabled keys
   xx     XX
 )
@@ -104,13 +106,13 @@
 )
 
 ;; RIGHT HAND chord group
-(defchords uiop-group $ct
+(defchords uiop[-group $ct
   ;; Single keys
   (u      ) u           ;; single u = type u
   (  i    ) i           ;; single i = type i  
   (    o  ) o           ;; single o = type o
   (      p) p           ;; single p = type p
-  
+  (        [) bspc      ;; single [ = backspace (bspc) 
   ;; Two-key combinations
   (u i    ) @rsc        ;; u+i = right shift+cmd
   (u   o  ) @rsa        ;; u+o = right shift+alt
@@ -127,12 +129,15 @@
   
   ;; Four-key combination (right hyper)
   (u i o p) @rhyper     ;; u+i+o+p = all right modifiers
+
+  ;; Special Combinations
+  (       p [) @fdel    ;; p+[ = forward delete
 )
 
 (deflayer default
   @xx      f1      f2      f3      f4      f5      f6      f7      f8      f9      f10     f11     f12
-  @grv     1       2       3       4       5       6       7       8       9       0       -       @xx     @xx
-  @tab     @chq    @chw    @che    @chr    t       y       @chu    @chi    @cho    @chp    @brc    @xx     @xx
+  @grv     1       2       3       4       5       6       7       8       @obrk   0       @pipe   @xx     @xx
+  @tab     @chq    @chw    @che    @chr    t       y       @chu    @chi    @cho    @chp    @ch[    @xx     @xx
   @hyp     a       s       d       f       g       h       j       k       l       ;       '       @xx
   lsft     z       x       c       v       b       n       m       ,       .       /       rsft
   fn       @xx     @xx     lmet                    spc                    @rcm     @xx     left    down    up      rght
@@ -150,7 +155,7 @@
 (deflayer sym
   _        _       _       _       _       _       _       _       _       _       _       _       _
   _        _       _       _       _       _       _       _       _       [       ]       \       _       _
-  _        _       _       _       _       _       _       _       _       _       _       del     _       _
+  _        _       _       _       _       _       _       _       _       _       _       _       _       _
   _        _       _       _       _       _       _       _       _       _       _       _       _
   _        _       _       _       _       _       _       _       -       =       _       _
   _        _       _       _                        _                        _       _       _       _       _       _
@@ -162,7 +167,7 @@
   _        _       _       _       _       _       _       _       _       _       _       _       _       _
   _        _       _       _       _       _       _       _       lrld    _       _       _       _
   _        _       _       _       _       _       _       _       _       _       _       _
-  _        _       _       _                        _                        _       _       _       _       _       _
+  _        _       _       _                       _                       _       _       _       _       _       _
 )
 ;; use this as a template for new layers
 (deflayer template 
@@ -171,5 +176,5 @@
   _        _       _       _       _       _       _       _       _       _       _       _       _       _
   _        _       _       _       _       _       _       _       _       _       _       _       _
   _        _       _       _       _       _       _       _       _       _       _       _
-  _        _       _       _                        _                        _       _       _       _       _       _
+  _        _       _       _                       _                       _       _       _       _       _       _
 )
