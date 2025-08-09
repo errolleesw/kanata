@@ -179,7 +179,7 @@
 (deflayer navigation
   _        _       _       _       _       _       _       _       _       _       _       _       _
   _        [       S-9     S-0     ]       _       _       _       _       _       _       _       _       _
-  _        _       S-[     S-]     _       _       home    pgdn    pgup    end     _       del     _       _
+  _        _       S-[     S-]     _       _       _       M-tab   M-grv   C-tab   _       del     _       _
   _        _       -       =       _       _       left    down    up      rght    _       _       _
   _        S-,     S-\     _       S-.     _       @sword  @sline  _       _       _       _
   _        _       _       _                        _                        _       _       _       _       _       _
