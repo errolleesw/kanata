@@ -106,10 +106,13 @@
   xx     XX
 
   ;; Select current word (macOS): ⌥← then ⌥⇧→
-  sel_word (macro A-left A-S-right)
-  sel_line (macro M-left M-left M-left M-S-right M-S-right M-S-right) ;; repeated to make sure we go to the start of the line and right to the end of the line.
+  sword (macro A-left A-S-right)
+  sline (macro M-left M-left M-left M-S-right M-S-right M-S-right) ;; repeated to make sure we go to the start of the line and right to the end of the line.
 
-
+  ;; Mac services functions
+  lock (cmd $hs-cli -c r#"hs.caffeinate.lockScreen()"#) ;; Lock the screen
+  sleep (cmd $hs-cli -c r#"hs.caffeinate.systemSleep()"#) ;; Put the system to sleep
+  
 )
 
 ;; LEFT HAND chord group
@@ -175,10 +178,10 @@
 
 (deflayer navigation
   _        _       _       _       _       _       _       _       _       _       _       _       _
-  _        _       _       _       _       _       _       _       _       _       _       _       _       _
-  _        _       _       _       _       _       home    pgdn    pgup    end     _       del     _       _
-  _        _       _       _       _       _       left    down    up      rght    _       _       _
-  _        _       _       _       _       _       @sel_word @sel_line _       _       _       _
+  _        [       S-9     S-0     ]       _       _       _       _       _       _       _       _       _
+  _        _       S-[     S-]     _       _       home    pgdn    pgup    end     _       del     _       _
+  _        _       -       =       _       _       left    down    up      rght    _       _       _
+  _        S-,     S-\     _       S-.     _       @sword  @sline  _       _       _       _
   _        _       _       _                        _                        _       _       _       _       _       _
 )
 
@@ -195,7 +198,7 @@
   _        _       _       _       _       _       _       _       _       _       _       _       _
   _        _       _       _       _       _       _       _       _       _       _       _       _       _
   _        _       _       _       _       _       _       _       _       _       _       _       _       _
-  _        _       _       _       _       _       _       _       lrld    _       _       _       _
+  _        _       @sleep  _       _       _       _       _       lrld    @lock   _       _       _
   _        _       _       _       _       _       _       _       _       _       _       _
   _        _       _       _                       _                       _       _       _       _       _       _
 )
