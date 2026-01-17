@@ -47,7 +47,7 @@
 (defalias
   ;; Multi-modifier outputs for LEFT HAND combinations
   ca      (multi lctl lalt)           ;; ctrl+alt
-  cc      (multi lctl lmet)           ;; ctrl+cmd  
+  cc      (multi lctl lmet)           ;; ctrl+cmd
   cs      (multi lctl lsft)           ;; ctrl+shift
   ac      (multi lalt lmet)           ;; alt+cmd
   as      (multi lalt lsft)           ;; alt+shift
@@ -59,35 +59,35 @@
   hyper   (multi lctl lalt lmet lsft) ;; all four (hyper)
 
   ;; Multi-modifier outputs for RIGHT HAND combinations
-  rsc     (multi rsft rmet)           ;; right shift+cmd (j+k)
-  rsa     (multi rsft ralt)           ;; right shift+alt (j+l)
-  rsh     (multi rsft rctl)           ;; right shift+ctrl (j+;)
-  rmc     (multi rmet ralt)           ;; right cmd+alt (k+l)
-  rmh     (multi rmet rctl)           ;; right cmd+ctrl (k+;)
-  rah     (multi ralt rctl)           ;; right alt+ctrl (l+;)
-  rsmc    (multi rsft rmet ralt)      ;; right shift+cmd+alt (j+k+l)
-  rsmh    (multi rsft rmet rctl)      ;; right shift+cmd+ctrl (j+k+;)
-  rsah    (multi rsft ralt rctl)      ;; right shift+alt+ctrl (j+l+;)
-  rmah    (multi rmet ralt rctl)      ;; right cmd+alt+ctrl (k+l+;)
-  rhyper  (multi rsft rmet ralt rctl) ;; all four right mods (j+k+l+;)
+  rsc     (multi rsft rmet)           ;; right shift+cmd (h+a)
+  rsa     (multi rsft ralt)           ;; right shift+alt (h+e)
+  rsh     (multi rsft rctl)           ;; right shift+ctrl (h+i)
+  rmc     (multi rmet ralt)           ;; right cmd+alt (a+e)
+  rmh     (multi rmet rctl)           ;; right cmd+ctrl (a+i)
+  rah     (multi ralt rctl)           ;; right alt+ctrl (e+i)
+  rsmc    (multi rsft rmet ralt)      ;; right shift+cmd+alt (h+a+e)
+  rsmh    (multi rsft rmet rctl)      ;; right shift+cmd+ctrl (h+a+i)
+  rsah    (multi rsft ralt rctl)      ;; right shift+alt+ctrl (h+e+i)
+  rmah    (multi rmet ralt rctl)      ;; right cmd+alt+ctrl (a+e+i)
+  rhyper  (multi rsft rmet ralt rctl) ;; all four right mods (h+a+e+i)
 
-  ;; LEFT HAND Chord aliases WITH tap-hold behavior
-  cha     (tap-hold-except-keys $tt $htm (chord asdf-group a) lctl (q w e r t a s d f g z x c v b))
-  chs     (tap-hold-except-keys $tt $htm (chord asdf-group s) lalt (q w e r t a s d f g z x c v b))
-  chd     (tap-hold-except-keys $tt $htm (chord asdf-group d) lmet (q w e r t a s d f g z x c v b))
-  chf     (tap-hold-except-keys $tt $htm (chord asdf-group f) lsft (q w e r t a s d f g z x c v b))
+  ;; LEFT HAND Chord aliases WITH tap-hold behavior (graphite: n r t s)
+  chn     (tap-hold-except-keys $tt $htm (chord nrts-group n) lctl (b l d w z q x m c v n r t s g))
+  chr     (tap-hold-except-keys $tt $htm (chord nrts-group r) lalt (b l d w z q x m c v n r t s g))
+  cht     (tap-hold-except-keys $tt $htm (chord nrts-group t) lmet (b l d w z q x m c v n r t s g))
+  chs     (tap-hold-except-keys $tt $htm (chord nrts-group s) lsft (b l d w z q x m c v n r t s g))
 
-  ;; RIGHT HAND Chord aliases WITH tap-hold behavior
-  chj     (tap-hold-except-keys $tt $htm (chord jkl;-group j) rsft (y u i o p h j k l ; n m , .))
-  chk     (tap-hold-except-keys $tt $htm (chord jkl;-group k) rmet (y u i o p h j k l ; n m , .))
-  chl     (tap-hold-except-keys $tt $htm (chord jkl;-group l) ralt (y u i o p h j k l ; n m , .))
-  ch;     (tap-hold-except-keys $tt $htm (chord jkl;-group ;) rctl (y u i o p h j k l ; n m , .))
-  
+  ;; RIGHT HAND Chord aliases WITH tap-hold behavior (graphite: h a e i)
+  chh     (tap-hold-except-keys $tt $htm (chord haei-group h) rsft (y f o u j k p , . / h a e i))
+  cha     (tap-hold-except-keys $tt $htm (chord haei-group a) rmet (y f o u j k p , . / h a e i))
+  che     (tap-hold-except-keys $tt $htm (chord haei-group e) ralt (y f o u j k p , . / h a e i))
+  chi     (tap-hold-except-keys $tt $htm (chord haei-group i) rctl (y f o u j k p , . / h a e i))
+
   ;; Special keys
   hyp    (tap-hold $tt $htm esc (multi lctl lsft)) ;; Hyper key
   obrk   (tap-hold $tt $htl 9 (macro [ [)) ;; tap-hold for open bracket [[ key for Obsidian.
   pipe   (tap-hold $tt $htm - S-\) ;; tap-hold for pipe (|) key
-  
+
   ;; LAYER keys
   tab (tap-hold $tt $htm
       tab
@@ -113,7 +113,7 @@
   exit (multi
     k       (cmd $hs-cli -c r#"kanataHUDHide()"#)
              (layer-switch default))
- 
+
   ;; Disabled keys
   xx     XX
 
@@ -126,7 +126,7 @@
   sleep (cmd $hs-cli -c r#"hs.caffeinate.systemSleep()"#) ;; Put the system to sleep
 
   app_switch_hold (tap-hold $tt $htm
-    M-tab 
+    M-tab
     (multi
       (on-press press-virtualkey vk_lmet)       ;; start holding Left Cmd
       tab                           ;; open switcher
@@ -134,68 +134,68 @@
 
   ;; fn layer activation
   fn (layer-while-held fn)          ;; hold fn to activate fn layer for media keys
-  
+
 )
 
-;; LEFT HAND chord group (home row: a s d f)
-(defchords asdf-group $ct
+;; LEFT HAND chord group (graphite home row: n r t s)
+(defchords nrts-group $ct
   ;; Single keys
-  (a      ) a           ;; single a = type a
-  (  s    ) s           ;; single s = type s  
-  (    d  ) d           ;; single d = type d
-  (      f) f           ;; single f = type f
-  
+  (n      ) n           ;; single n = type n
+  (  r    ) r           ;; single r = type r
+  (    t  ) t           ;; single t = type t
+  (      s) s           ;; single s = type s
+
   ;; Two-key combinations
-  (a s    ) @ca         ;; a+s = ctrl+alt
-  (a   d  ) @cc         ;; a+d = ctrl+cmd
-  (a     f) @cs         ;; a+f = ctrl+shift
-  (  s d  ) @ac         ;; s+d = alt+cmd
-  (  s   f) @as         ;; s+f = alt+shift
-  (    d f) @mc         ;; d+f = cmd+shift
-  
+  (n r    ) @ca         ;; n+r = ctrl+alt
+  (n   t  ) @cc         ;; n+t = ctrl+cmd
+  (n     s) @cs         ;; n+s = ctrl+shift
+  (  r t  ) @ac         ;; r+t = alt+cmd
+  (  r   s) @as         ;; r+s = alt+shift
+  (    t s) @mc         ;; t+s = cmd+shift
+
   ;; Three-key combinations
-  (a s d  ) @cac        ;; a+s+d = ctrl+alt+cmd
-  (a s   f) @cas        ;; a+s+f = ctrl+alt+shift
-  (a   d f) @ccs        ;; a+d+f = ctrl+cmd+shift
-  (  s d f) @acs        ;; s+d+f = alt+cmd+shift
-  
+  (n r t  ) @cac        ;; n+r+t = ctrl+alt+cmd
+  (n r   s) @cas        ;; n+r+s = ctrl+alt+shift
+  (n   t s) @ccs        ;; n+t+s = ctrl+cmd+shift
+  (  r t s) @acs        ;; r+t+s = alt+cmd+shift
+
   ;; Four-key combination (hyper)
-  (a s d f) @hyper      ;; a+s+d+f = all modifiers
+  (n r t s) @hyper      ;; n+r+t+s = all modifiers
 )
 
-;; RIGHT HAND chord group (home row: j k l ;)
-(defchords jkl;-group $ct
+;; RIGHT HAND chord group (graphite home row: h a e i)
+(defchords haei-group $ct
   ;; Single keys
-  (j      ) j           ;; single j = type j
-  (  k    ) k           ;; single k = type k  
-  (    l  ) l           ;; single l = type l
-  (      ;) ;           ;; single ; = type ;
+  (h      ) h           ;; single h = type h
+  (  a    ) a           ;; single a = type a
+  (    e  ) e           ;; single e = type e
+  (      i) i           ;; single i = type i
   ;; Two-key combinations
-  (j k    ) @rsc        ;; j+k = right shift+cmd
-  (j   l  ) @rsa        ;; j+l = right shift+alt
-  (j     ;) @rsh        ;; j+; = right shift+ctrl
-  (  k l  ) @rmc        ;; k+l = right cmd+alt
-  (  k   ;) @rmh        ;; k+; = right cmd+ctrl
-  (    l ;) @rah        ;; l+; = right alt+ctrl
-  
+  (h a    ) @rsc        ;; h+a = right shift+cmd
+  (h   e  ) @rsa        ;; h+e = right shift+alt
+  (h     i) @rsh        ;; h+i = right shift+ctrl
+  (  a e  ) @rmc        ;; a+e = right cmd+alt
+  (  a   i) @rmh        ;; a+i = right cmd+ctrl
+  (    e i) @rah        ;; e+i = right alt+ctrl
+
   ;; Three-key combinations
-  (j k l  ) @rsmc       ;; j+k+l = right shift+cmd+alt
-  (j k   ;) @rsmh       ;; j+k+; = right shift+cmd+ctrl
-  (j   l ;) @rsah       ;; j+l+; = right shift+alt+ctrl
-  (  k l ;) @rmah       ;; k+l+; = right cmd+alt+ctrl
-  
+  (h a e  ) @rsmc       ;; h+a+e = right shift+cmd+alt
+  (h a   i) @rsmh       ;; h+a+i = right shift+cmd+ctrl
+  (h   e i) @rsah       ;; h+e+i = right shift+alt+ctrl
+  (  a e i) @rmah       ;; a+e+i = right cmd+alt+ctrl
+
   ;; Four-key combination (right hyper)
-  (j k l ;) @rhyper     ;; j+k+l+; = all right modifiers
+  (h a e i) @rhyper     ;; h+a+e+i = all right modifiers
 
 )
 
 (deflayer default
   @xx      f1      f2      f3      f4      f5      f6      f7      f8      f9      f10     f11     f12
   @grv     1       2       3       4       5       6       7       8       @obrk   0       @pipe   @xx     XX
-  @tab     q       w       e       r       t       y       u       i       o       p       bspc    @xx     @xx
-  @hyp     @cha    @chs    @chd    @chf    g       h       @chj    @chk    @chl    @ch;    '       @xx
-  lsft     z       x       c       v       b       n       m       ,       .       /       rsft
-  @fn      @xx     @xx     lmet                    spc                    @rcm     @xx     left    down    up      rght
+  @tab     b       l       d       w       z       -       f       o       u       j       bspc    @xx     @xx
+  @hyp     @chn    @chr    @cht    @chs    g       y       @chh    @cha    @che    @chi    '       @xx
+  lsft     q       x       m       c       v       k       p       ,       .       /       rsft
+  @fn      @xx     @xx     lmet                    spc                    @rcm     bspc     left    down    up      rght
 )
 
 (deflayer navigation
@@ -234,18 +234,18 @@
   _        _       _       _                       _                       _       _       _       _       _       _
 )
 
-(deflayer graphite
+(deflayer qwerty
   _        _       _       _       _       _       _       _       _       _       _       _       _
   @grv     1       2       3       4       5       6       7       8       @obrk   0       @pipe   @xx     XX
-  @tab     b       l       d       w       z       -       f       o       u       j       bspc    _       _
-  @hyp     n       r       t       s       g       y       h       a       e       i       '       _
-  lsft     q       x       m       c       v       k       p       ,       .       /       rsft
+  @tab     q       w       e       r       t       y       u       i       o       p       bspc    _       _
+  @hyp     a       s       d       f       g       h       j       k       l       ;       '       _
+  lsft     z       x       c       v       b       n       m       ,       .       /       rsft
   @fn       _       _       lmet                    spc                     @rcm    @xx     _       _       _       _
 )
 
 
 ;; use this as a template for new layers
-(deflayer template 
+(deflayer template
   _        _       _       _       _       _       _       _       _       _       _       _       _
   _        _       _       _       _       _       _       _       _       _       _       _       _       _
   _        _       _       _       _       _       _       _       _       _       _       _       _       _
